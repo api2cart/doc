@@ -1,37 +1,45 @@
 name: Update OpenAPI from API2Cart
 
 on:
-  # Запускати за розкладом (cron) щодня о 00:00 (UTC). 
-  
-  #schedule:
-    #- cron: '0 0 * * *'
-  
-    # Дозволити ручний запуск (натиснення кнопки "Run workflow" у GitHub)
-  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'     # Автоматичний запуск щодня опівночі (UTC)
+  workflow_dispatch:         # Дозволяє вручну запускати у вкладці Actions
+
+permissions:
+  contents: write            # Дає дозвіл на пуш у репозиторій
 
 jobs:
   update-openapi:
     runs-on: ubuntu-latest
 
     steps:
-      # Крок 1: Клонувати (checkout) цей же репозиторій у робочу директорію Action
+      # Крок 1: Клонувати (checkout) цей репозиторій у робочу директорію Action
       - name: Check out repository
         uses: actions/checkout@v2
 
-      # Крок 2: Завантажити свіжий openapi.json із https://app.api2cart.com/
-      - name: Fetch openapi.json
+      # Крок 2: Завантажити файли openapi.json (загальний та мовні) у відповідні папки
+      - name: Fetch OpenAPI files
         run: |
+          # Створюємо підпапки (якщо вони не існують)
+          mkdir -p de es it fr
+          
+          # Завантажуємо основний openapi.json
           curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json
 
-      # Крок 3: Закомітити файл, якщо він змінився
+          # Завантажуємо мовні openapi-файли
+          curl -fSLo de/de_openapi.json https://app.api2cart.com/openapi/de_openapi.json
+          curl -fSLo es/es_openapi.json https://app.api2cart.com/openapi/es_openapi.json
+          curl -fSLo it/it_openapi.json https://app.api2cart.com/openapi/it_openapi.json
+          curl -fSLo fr/fr_openapi.json https://app.api2cart.com/openapi/fr_openapi.json
+
+      # Крок 3: Закомітити файли, якщо вони змінилися
       - name: Commit changes
         run: |
-          # Якщо після завантаження є зміни, комітимо
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "GitHub Actions"
             git config user.email "actions@github.com"
-            git add openapi.json
-            git commit -m "Update openapi.json automatically"
+            git add openapi.json de/ es/ it/ fr/
+            git commit -m "Update openapi files automatically"
           else
             echo "No changes in openapi.json. Skip commit."
           fi
