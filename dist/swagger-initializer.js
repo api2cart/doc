@@ -2,7 +2,7 @@
 // window.location.pathname => "/de/index.html"
 // Розіб'ємо шлях на складові: ['', 'de', 'index.html']
 const pathSegments = window.location.pathname.split('/');
-let lang = pathSegments[1]; // "de" або "it" чи "fr"...
+let lang = pathSegments[2]; // "de" або "it" чи "fr"...
 
 // Шлях до файлу openapi за замовчуванням (англійський)
 let openapiUrl = "https://api2cart.github.io/doc/openapi.json";
