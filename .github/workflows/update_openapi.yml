@@ -2,9 +2,11 @@ name: Update OpenAPI from API2Cart
 
 on:
   # Запускати за розкладом (cron) щодня о 00:00 (UTC). 
-  schedule:
-    - cron: '0 0 * * *'
-  # Дозволити ручний запуск (натиснення кнопки "Run workflow" у GitHub)
+  
+  #schedule:
+    #- cron: '0 0 * * *'
+  
+    # Дозволити ручний запуск (натиснення кнопки "Run workflow" у GitHub)
   workflow_dispatch:
 
 jobs:
