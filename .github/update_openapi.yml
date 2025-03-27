@@ -1,0 +1,42 @@
+name: Update OpenAPI from API2Cart
+
+on:
+  # Запускати за розкладом (cron) щодня о 00:00 (UTC). 
+  schedule:
+    - cron: '0 0 * * *'
+  # Дозволити ручний запуск (натиснення кнопки "Run workflow" у GitHub)
+  workflow_dispatch:
+
+jobs:
+  update-openapi:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Крок 1: Клонувати (checkout) цей же репозиторій у робочу директорію Action
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      # Крок 2: Завантажити свіжий openapi.json із https://app.api2cart.com/
+      - name: Fetch openapi.json
+        run: |
+          curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json
+
+      # Крок 3: Закомітити файл, якщо він змінився
+      - name: Commit changes
+        run: |
+          # Якщо після завантаження є зміни, комітимо
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git add openapi.json
+            git commit -m "Update openapi.json automatically"
+          else
+            echo "No changes in openapi.json. Skip commit."
+          fi
+
+      # Крок 4: Запушити зміни назад у GitHub
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
