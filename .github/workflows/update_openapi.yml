@@ -1,50 +1,41 @@
-name: Update OpenAPI from API2Cart
+name: Update OpenAPI
 
 on:
   schedule:
-    - cron: '0 0 * * *'     # Автоматичний запуск щодня опівночі (UTC)
-  workflow_dispatch:         # Дозволяє вручну запускати у вкладці Actions
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: write            # Дає дозвіл на пуш у репозиторій
+  contents: write
 
 jobs:
   update-openapi:
     runs-on: ubuntu-latest
 
     steps:
-      # Крок 1: Клонувати (checkout) цей репозиторій у робочу директорію Action
+      # 1. Клонуємо з усією історією (fetch-depth: 0)
       - name: Check out repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # <- ВАЖЛИВО
 
-      # Крок 2: Завантажити файли openapi.json (загальний та мовні) у відповідні папки
-      - name: Fetch OpenAPI files
+      # 2. (опційно) робимо pull --rebase, якщо хочемо гарантовано “підтягнути” найсвіжіші зміни
+      - name: Pull changes
         run: |
-          # Створюємо підпапки (якщо вони не існують)
-          mkdir -p de es it fr
-          
-          # Завантажуємо основний openapi.json
-          curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git pull --rebase origin main
 
-          # Завантажуємо мовні openapi-файли
-          curl -fSLo de/de_openapi.json https://app.api2cart.com/openapi/de_openapi.json
-          curl -fSLo es/es_openapi.json https://app.api2cart.com/openapi/es_openapi.json
-          curl -fSLo it/it_openapi.json https://app.api2cart.com/openapi/it_openapi.json
-          curl -fSLo fr/fr_openapi.json https://app.api2cart.com/openapi/fr_openapi.json
+      - name: Fetch openapi.json
+        run: |
+          # ваші команди curl
+          echo "..."
 
-      # Крок 3: Закомітити файли, якщо вони змінилися
       - name: Commit changes
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "GitHub Actions"
-            git config user.email "actions@github.com"
-            git add openapi.json de/ es/ it/ fr/
-            git commit -m "Update openapi files automatically"
-          else
-            echo "No changes in openapi.json. Skip commit."
-          fi
+          # ваші команди git add / commit
+          echo "..."
 
-      # Крок 4: Запушити зміни назад у GitHub
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
