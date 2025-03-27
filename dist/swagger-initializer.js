@@ -41,4 +41,3 @@
     ],
     layout: "StandaloneLayout"
   });
-};
