@@ -1,4 +1,4 @@
-name: Update OpenAPI
+name: Update OpenAPI from API2Cart
 
 on:
   schedule:
@@ -13,28 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Клонуємо з усією історією (fetch-depth: 0)
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # <- ВАЖЛИВО
+          fetch-depth: 0  # ВАЖЛИВО, отримує всю історію, а не тільки останній коміт
 
-      # 2. (опційно) робимо pull --rebase, якщо хочемо гарантовано “підтягнути” найсвіжіші зміни
-      - name: Pull changes
+      - name: Pull remote changes
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          # Підтягуємо оновлення, якщо паралельно були нові коміти в main
           git pull --rebase origin main
 
-      - name: Fetch openapi.json
+      - name: Fetch openapi files
         run: |
-          # ваші команди curl
-          echo "..."
+          # Ваші curl для завантаження файлів
+          echo "curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json"
+          # ... тощо
 
       - name: Commit changes
         run: |
-          # ваші команди git add / commit
-          echo "..."
+          # Перевіряємо, чи є зміни, і комітимо
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Update openapi.json automatically"
+          else
+            echo "No changes to commit."
+          fi
 
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
