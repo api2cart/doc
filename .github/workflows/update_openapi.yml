@@ -22,8 +22,8 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          # Підтягуємо оновлення, якщо паралельно були нові коміти в main
-          git pull --rebase origin main
+          # Підтягуємо оновлення, якщо паралельно були нові коміти в master
+          git pull --rebase origin master
 
       - name: Fetch openapi files
         run: |
@@ -49,5 +49,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          branch: main
+          branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
