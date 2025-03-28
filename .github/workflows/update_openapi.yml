@@ -30,10 +30,10 @@ jobs:
           # Ваші curl для завантаження файлів
           echo "curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json"
             # Завантажуємо мовні openapi-файли
-          curl -fSLo de/de_openapi.json https://app.api2cart.com/openapi/de_openapi.json
-          curl -fSLo es/es_openapi.json https://app.api2cart.com/openapi/es_openapi.json
-          curl -fSLo it/it_openapi.json https://app.api2cart.com/openapi/it_openapi.json
-          curl -fSLo fr/fr_openapi.json https://app.api2cart.com/openapi/fr_openapi.json
+          curl -fSLo de/openapi.json https://app.api2cart.com/openapi/de_openapi.json
+          curl -fSLo es/openapi.json https://app.api2cart.com/openapi/es_openapi.json
+          curl -fSLo it/openapi.json https://app.api2cart.com/openapi/it_openapi.json
+          curl -fSLo fr/openapi.json https://app.api2cart.com/openapi/fr_openapi.json
           # ... тощо
 
       - name: Commit changes
