@@ -1,17 +1,17 @@
 version: 2
 
 build:
-  image: "ubuntu-20.04"  # Замініть на одну з підтримуваних версій
-  os: "ubuntu-20.04"     # Використовуйте правильну версію ОС
+  os: "ubuntu-22.04"  # Можна вказати одну з підтримуваних версій ОС
   tools:
-    python: "3.8"
+    python: "3.8"  # Вказуємо версію Python для побудови документації
 
 sphinx:
-  configuration: "docs/conf.py"
+  configuration: "docs/conf.py"  # Якщо використовуєте Sphinx для генерації документації
 
 python:
   install:
-    - requirements: "docs/requirements.txt"
+    - requirements: "docs/requirements.txt"  # Вказуємо шлях до файлу з залежностями
 
+# Якщо ви хочете публікувати статичну сторінку документації
 static:
-  html: "index.html"
+  html: "index.html"  # Ваш HTML файл для публікації (можливо, з Swagger UI або Redoc)
