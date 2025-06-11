@@ -6,6 +6,12 @@ build:
   tools:
     python: "3.8"
 
-# Додавання статичного сайту (Swagger UI або Redoc)
+sphinx:
+  configuration: "docs/conf.py"
+
+python:
+  install:
+    - requirements: "docs/requirements.txt"
+
 static:
   html: "index.html"
