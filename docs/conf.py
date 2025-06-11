@@ -25,5 +25,5 @@ html_static_path = ['_static']  # Папка зі статичними файл�
 
 # Інтеграція Swagger/OpenAPI через Swagger UI або Redoc
 html_context = {
-    'swagger_ui': 'swagger.yaml',  # Вказуємо шлях до вашого swagger.yaml або swagger.json
+    'swagger_ui': '../swagger.yaml',  # Вказуємо шлях до вашого swagger.yaml або swagger.json
 }
