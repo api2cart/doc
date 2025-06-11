@@ -14,7 +14,7 @@ extensions = [
 ]
 
 # Суфікс вихідних файлів
-source_suffix = '.html'
+source_suffix = '.rst'
 
 # Документ, що є головним
 master_doc = 'index'
