@@ -34,7 +34,7 @@ jobs:
           curl -fSLo es/openapi.json https://app.api2cart.com/openapi/es_openapi.json
           curl -fSLo it/openapi.json https://app.api2cart.com/openapi/it_openapi.json
           curl -fSLo fr/openapi.json https://app.api2cart.com/openapi/fr_openapi.json
-          curl -fSLo /openapi.json https://app.api2cart.com/openapi/openapi.json
+          curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json
           # ... òîùî
 
       - name: Commit changes
