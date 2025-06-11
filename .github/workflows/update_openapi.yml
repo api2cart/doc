@@ -16,29 +16,30 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # ВАЖЛИВО, отримує всю історію, а не тільки останній коміт
+          fetch-depth: 0  # Г‚ГЂГ†Г‹Г€Г‚ГЋ, Г®ГІГ°ГЁГ¬ГіВє ГўГ±Гѕ ВіГ±ГІГ®Г°ВіГѕ, Г  Г­ГҐ ГІВіГ«ГјГЄГЁ Г®Г±ГІГ Г­Г­ВіГ© ГЄГ®Г¬ВіГІ
 
       - name: Pull remote changes
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          # Підтягуємо оновлення, якщо паралельно були нові коміти в master
+          # ГЏВіГ¤ГІГїГЈГіВєГ¬Г® Г®Г­Г®ГўГ«ГҐГ­Г­Гї, ГїГЄГ№Г® ГЇГ Г°Г Г«ГҐГ«ГјГ­Г® ГЎГіГ«ГЁ Г­Г®ГўВі ГЄГ®Г¬ВіГІГЁ Гў master
           git pull --rebase origin master
 
       - name: Fetch openapi files
         run: |
-          # Ваші curl для завантаження файлів
+          # Г‚Г ГёВі curl Г¤Г«Гї Г§Г ГўГ Г­ГІГ Г¦ГҐГ­Г­Гї ГґГ Г©Г«ВіГў
           echo "curl -fSLo openapi.json https://app.api2cart.com/openapi/openapi.json"
-            # Завантажуємо мовні openapi-файли
+            # Г‡Г ГўГ Г­ГІГ Г¦ГіВєГ¬Г® Г¬Г®ГўГ­Ві openapi-ГґГ Г©Г«ГЁ
           curl -fSLo de/openapi.json https://app.api2cart.com/openapi/de_openapi.json
           curl -fSLo es/openapi.json https://app.api2cart.com/openapi/es_openapi.json
           curl -fSLo it/openapi.json https://app.api2cart.com/openapi/it_openapi.json
           curl -fSLo fr/openapi.json https://app.api2cart.com/openapi/fr_openapi.json
-          # ... тощо
+          curl -fSLo /openapi.json https://app.api2cart.com/openapi/openapi.json
+          # ... ГІГ®Г№Г®
 
       - name: Commit changes
         run: |
-          # Перевіряємо, чи є зміни, і комітимо
+          # ГЏГҐГ°ГҐГўВіГ°ГїВєГ¬Г®, Г·ГЁ Вє Г§Г¬ВіГ­ГЁ, Ві ГЄГ®Г¬ВіГІГЁГ¬Г®
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -m "Update openapi.json automatically"
