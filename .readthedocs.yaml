@@ -1,8 +1,8 @@
 version: 2
 
 build:
-  image: "ubuntu-20.04"
-  os: "ubuntu"
+  image: "ubuntu-20.04"  # Замініть на одну з підтримуваних версій
+  os: "ubuntu-20.04"     # Використовуйте правильну версію ОС
   tools:
     python: "3.8"
 
