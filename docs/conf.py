@@ -23,7 +23,17 @@ master_doc = 'index'
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']  # Папка зі статичними файлами (якщо є)
 
-# Інтеграція Swagger/OpenAPI через Swagger UI або Redoc
+# Налаштування для інтеграції Swagger UI
+# HTML сторінка, яка відображатиме Swagger UI
 html_context = {
-    'swagger_ui': '../swagger.yaml',  # Вказуємо шлях до вашого swagger.yaml або swagger.json
+    'swagger_ui_url': 'swagger.yaml',  # Шлях до вашого Swagger YAML файлу
 }
+
+# Якщо ви хочете використовувати Redoc замість Swagger UI
+# html_context = {
+#     'redoc_url': 'swagger.yaml',  # Шлях до вашого Swagger YAML файлу
+# }
+
+# Додаткові налаштування для статичних файлів (якщо є)
+html_extra_path = ['_extra']
+
