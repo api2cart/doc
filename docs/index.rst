@@ -31,8 +31,8 @@ To interact with the API, use the Swagger UI below. It will display the endpoint
       <div id="swagger-ui"></div>
       <script>
          const ui = SwaggerUIBundle({
-            url: "swagger.yaml",  # Вказуємо шлях до вашого swagger.yaml або swagger.json
-            dom_id: "#swagger-ui",
+            url: "docs/swagger.yaml",
+            dom_id: "#docs/swagger-ui",
          });
       </script>
    </body>
