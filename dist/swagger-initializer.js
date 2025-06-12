@@ -1,43 +1,26 @@
-// Приклад: https://api2cart-5448ee.gitlab.io/de/index.html
+// URL: https://api2cart-5448ee.gitlab.io/de/index.html
 // window.location.pathname => "/de/index.html"
-// Розіб'ємо шлях на складові: ['', 'de', 'index.html']
+// РЎРµРіРјРµРЅС‚Рё С€Р»СЏС…Сѓ СЂРѕР·РґС–Р»СЏСЋС‚СЊСЃСЏ РЅР°: ['', 'de', 'index.html']
 const pathSegments = window.location.pathname.split('/');
-let lang = pathSegments[2]; // "de" або "it" чи "fr"...
 
-// Шлях до файлу openapi за замовчуванням (англійський)
-let openapiUrl = "https://api2cart.github.io/doc/openapi.json";
+// РџРѕС‡Р°С‚РєРѕРІРёР№ URL РґР»СЏ openapi.json (Р·Р° Р·Р°РјРѕРІС‡СѓРІР°РЅРЅСЏРј)
+let openapiUrl = "openapi.json";
 
-// Залежно від lang підставляємо іншу URL-адресу
-switch (lang) {
-  case 'de':
-    openapiUrl = "https://api2cart.github.io/doc/de/openapi.json";
-    break;
-  case 'it':
-    openapiUrl = "https://api2cart.github.io/doc/it/openapi.json";
-    break;
-  case 'fr':
-    openapiUrl = "https://api2cart.github.io/doc/fr/openapi.json";
-    break;
-  case 'es':
-    openapiUrl = "https://api2cart.github.io/doc/es/openapi.json";
-    break;
-  // Можна додати інші мови / кейси
-  default:
-    // якщо lang порожнє або не співпадає
-    openapiUrl = "https://api2cart.github.io/doc/openapi.json";
-}
+// Р—Р°Р»РµР¶РЅРѕ РІС–Рґ РјРѕРІРё РІ URL, Р·РјС–РЅСЋС”РјРѕ URL РґР»СЏ openapi.json
 
-// Ініціалізуємо Swagger
+openapiUrl = "openapi.json";
+
+// Р†РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ Swagger UI
 window.ui = SwaggerUIBundle({
-  url: openapiUrl,
-  dom_id: '#swagger-ui',
-  deepLinking: true,
+  url: openapiUrl,  // Р’РєР°Р·СѓС”РјРѕ РїСЂР°РІРёР»СЊРЅРёР№ URL РґР»СЏ РґРѕРєСѓРјРµРЅС‚Р°С†С–С— OpenAPI
+  dom_id: '#swagger-ui',  // РњС–СЃС†Рµ РґР»СЏ СЂРµРЅРґРµСЂРёРЅРіСѓ Swagger UI
+  deepLinking: true,  // Р”РѕР·РІРѕР»СЏС” РїСЂР°С†СЋРІР°С‚Рё Р· РіР»РёР±РѕРєРёРјРё РїРѕСЃРёР»Р°РЅРЅСЏРјРё
   presets: [
-    SwaggerUIBundle.presets.apis,
-    SwaggerUIStandalonePreset
+    SwaggerUIBundle.presets.apis,  // РќР°Р»Р°С€С‚СѓРІР°РЅРЅСЏ РґР»СЏ РІС–РґРѕР±СЂР°Р¶РµРЅРЅСЏ API
+    SwaggerUIStandalonePreset  // РЎС‚Р°РЅРґР°СЂС‚РЅРµ СЂРѕР·С‚Р°С€СѓРІР°РЅРЅСЏ
   ],
   plugins: [
-    SwaggerUIBundle.plugins.DownloadUrl
+    SwaggerUIBundle.plugins.DownloadUrl  // РџР»Р°РіС–РЅ РґР»СЏ Р·Р°РІР°РЅС‚Р°Р¶РµРЅРЅСЏ РґРѕРєСѓРјРµРЅС‚Р°С†С–С—
   ],
-  layout: "StandaloneLayout"
+  layout: "StandaloneLayout"  // Р’РёРєРѕСЂРёСЃС‚РѕРІСѓС”РјРѕ СЃС‚Р°РЅРґР°СЂС‚РЅРµ СЂРѕР·С‚Р°С€СѓРІР°РЅРЅСЏ РґР»СЏ Swagger
 });
