@@ -5,7 +5,7 @@ const pathSegments = window.location.pathname.split('/');
 let lang = pathSegments[2]; // "de" ��� "it" �� "fr"...
 
 // ���� �� ����� openapi �� ������������� (����������)
-let openapiUrl = "openapi.json";
+let openapiUrl = "docs/swagger.yaml";
 
 
 
