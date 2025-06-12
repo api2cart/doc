@@ -2,13 +2,29 @@
 // window.location.pathname => "/de/index.html"
 // Сегменти шляху розділяються на: ['', 'de', 'index.html']
 const pathSegments = window.location.pathname.split('/');
+let lang = pathSegments[1]; // "de", "it", "fr", ...
 
 // Початковий URL для openapi.json (за замовчуванням)
-let openapiUrl = "openapi.json";
+let openapiUrl = "https://api2cart.github.io/doc/openapi.json";
 
 // Залежно від мови в URL, змінюємо URL для openapi.json
-
-openapiUrl = "openapi.json";
+switch (lang) {
+  case 'de':
+    openapiUrl = "https://api2cart.github.io/doc/de/openapi.json";
+    break;
+  case 'it':
+    openapiUrl = "https://api2cart.github.io/doc/it/openapi.json";
+    break;
+  case 'fr':
+    openapiUrl = "https://api2cart.github.io/doc/fr/openapi.json";
+    break;
+  case 'es':
+    openapiUrl = "https://api2cart.github.io/doc/es/openapi.json";
+    break;
+  // За замовчуванням використовуємо основний файл
+  default:
+    openapiUrl = "https://api2cart.github.io/doc/openapi.json";
+}
 
 // Ініціалізація Swagger UI
 window.ui = SwaggerUIBundle({
