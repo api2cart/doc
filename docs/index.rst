@@ -21,37 +21,22 @@ To interact with the API, use the Swagger UI below. It will display the endpoint
 
 .. raw:: html
 
-<html lang="en">
-  <head>
+   <html>
+   <head>
     <meta charset="UTF-8">
     <title>Swagger UI1</title>
-    <link rel="stylesheet" type="text/css" href="dist/swagger-ui.css" />
-    <link rel="stylesheet" type="text/css" href="dist/index.css" />
-    <link rel="icon" type="image/png" href="dist/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="dist/favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" type="text/css" href="../dist/swagger-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../dist/index.css" />
+    <link rel="icon" type="image/png" href="../dist/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../dist/favicon-16x16.png" sizes="16x16" />
   </head>
-
   <body>
     <div id="swagger-ui"></div>
-    <script src="dist/swagger-ui-bundle.js" charset="UTF-8"> </script>
-    <script src="dist/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
-    <script src="dist/swagger-initializer.js" charset="UTF-8"> </script>
+    <script src="../dist/swagger-ui-bundle.js" charset="UTF-8"> </script>
+    <script src="../dist/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
+    <script src="../dist/swagger-initializer.js" charset="UTF-8"> </script>
   </body>
-</html>
-<script>
-  window.onload = function() {
-    // Initialize Swagger UI
-    const ui = SwaggerUIBundle({
-      url: "swagger.json",
-      dom_id: '#swagger-ui',
-      presets: [
-        SwaggerUIBundle.presets.apis,
-        SwaggerUIStandalonePreset
-      ],
-      layout: "StandaloneLayout"
-    });
-  };
-
+   </html>
 
 Links to Documentation
 ----------------------
