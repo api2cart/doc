@@ -32,7 +32,7 @@ To interact with the API, use the Swagger UI below. It will display the endpoint
       <script>
          const ui = SwaggerUIBundle({
             url: "swagger.yaml",
-            dom_id: "#docs/swagger-ui",
+            dom_id: "#swagger-ui",
          });
       </script>
    </body>
