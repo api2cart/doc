@@ -48,7 +48,7 @@ jobs:
           fi
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@v1.3.0
         with:
           branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
